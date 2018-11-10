@@ -42,6 +42,10 @@ class Page {
                         <td><?= $r->width; ?></td>
                         <td><?= $r->height; ?></td>
                         <td bgcolor=<?= $r->color; ?>><?= $r->color; ?></td>
+                        <td><form method="post">
+                                <input type="submit" name="test" id="test" value="Delete" /><br/>
+                                <input type="hidden" name="id" value=<?= $r->id; ?>>
+                            </form></td>
                     </tr>
                 <?php endforeach; ?>
 

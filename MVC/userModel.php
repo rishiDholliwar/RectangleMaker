@@ -47,7 +47,11 @@ class userModel {
 
     }
 
-    function readAllUsers(){
+    function getAllRects(){
+        $sql = 'SELECT * FROM rectangle';
+        $statement = self::$connection->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_OBJ);
 
     }
 

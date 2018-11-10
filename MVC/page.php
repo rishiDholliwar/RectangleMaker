@@ -4,7 +4,7 @@
 
 class Page {
 
-    function header(){ ?>
+    function header($rect){ ?>
         <!doctype html>
         <html lang="en">
         <head>
@@ -32,7 +32,14 @@ class Page {
                     <th>Action</th>
                 </tr>
 
+                <?php foreach($rect as $r): ?>
+                    <tr>
+                        <td><?= $r->id; ?></td>
+                        <td><?= $r->width; ?></td>
+                        <td><?= $r->height; ?></td>
 
+                    </tr>
+                <?php endforeach; ?>
 
             </table>
         </div>
@@ -53,37 +60,49 @@ class Page {
     function footer(){
 
     }
+
+    //https://www.tutorialspoint.com/php/php_dom_parser_example.htm
+    //http://www.webspeaks.in/2012/06/how-to-generate-html-elements-using-php.html
 //todo make it work with rectangles db
-    function insertTable(){
-        echo '<script>
- var table = document.getElementById("tbl");
-    var row = table.insertRow(1);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    cell1.innerHTML = "NEW CELL1";
-    cell2.innerHTML = "NEW CELL2";
-    </script>
+    function insertTable($rect){
+     $dom = new domDocument;
+
+        /*$dom = new DOMDocument('1.0');//Create new document with specified version number
+                //Outputs the generated source code
+         foreach ($records as $data) {
+          echo "<td>  escape($data->id) ... </td>"
+        }
+                $t = $dom->getElementById('tbl');
 
 
-';
+                $cell1 = $row.insertCell(0);
+                $cell2 = $row.insertCell(1);
+                $cell1->innerHTML = "NEW LL2";
+                $cell2->innerHTML = "NEW CELL2";
+                echo $dom->saveHTML();
+        /*
+                echo '<script type="text/javascript">
+           var php_var = "<?php echo $rect->getColor(); ?>";
+           alert("color= " + <?php echo $rect->getColor(); ?>);
+                var table = document.getElementById("tbl");
+                var rowCount = (table.rows.length) + 1;
+                var row = document.getElementById("tbl").insertRow();
+
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            //cell1.innerHTML = < " <?php echo $val ?> ";
+            cell2.innerHTML = "NEW CELL2";
+            </script>';
+        */
+
+
     }
-    function insertTable2(){
-        echo '<script>
- var table = document.getElementById("tbl");
-    var row = table.insertRow(2);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    cell1.innerHTML = "NEW CELL1";
-    cell2.innerHTML = "NEW CELL2";
-    </script>
 
-
-';
-    }
 
 
     function addRectForm(){
-      echo'  <form action="main.php" method="post">
+      echo'  <form  method="post">
             <div>
         Width: <input type="text" value="" name="width" id="width"></input>
             </div>

@@ -73,6 +73,7 @@ class Page {
                         ctx.beginPath();
                         ctx.lineWidth = "6";
                         ctx.strokeStyle = "red";
+                        ctx.fillStyle= "<?=$r->getColor() ?>";
                         ctx.fillRect(0, 0,<?=$r->getWidth() ?>, <?=$r->getHeight() ?>);
                         ctx.stroke();
                     </script>

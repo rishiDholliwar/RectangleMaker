@@ -6,11 +6,12 @@ class Rect{
     private $color;
     private $id;
 
-    public function __construct($width, $height, $color)
+    public function __construct($width, $height, $color,$id)
     {
         $this->width = $width;
         $this->height = $height;
         $this->color = $color;
+        $this->id = $id;
     }
 
     public static function getUsercount()

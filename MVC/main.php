@@ -8,20 +8,20 @@
     $pg = new Page();
     // Create User Model
     $um = new userModel();
+
     $um->connect();
 
 
 
-    $pg->header($um->getAllRects());
 
     //$pg->showRects($um->getConn());
-    //$pg->showDefaultRects();
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if (isset ($_POST['width'])  && isset($_POST['height']) ) {
                 $width = $_POST['width'];
                 $height = $_POST['height'];
                 $color = $_POST['color'];
+
                 $sql = 'INSERT INTO rectangle(width,height,color) VALUES(:width, :height, :color)';
                 $statement = $um->getConn()->prepare($sql);
                 if ($statement->execute([':width' => $width, ':height' => $height, ':color' => $color])) {
@@ -40,7 +40,7 @@
               //$pg->insertTable($newRect);
               //$pg->showRects($um->getConn());
 
-
+    $pg->header($um->getAllRects());
 
     //}
     // displayAllUsers

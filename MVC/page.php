@@ -29,15 +29,19 @@ class Page {
                     <th>ID</th>
                     <th>Width</th>
                     <th>Height</th>
+                    <th>Color</th>
                     <th>Action</th>
                 </tr>
+                <?php  $array  = array(); ?>
+                <?php foreach($rect as $r):?>
+                    <?php  $array[] = new Rect( $r->width, $r->height,$r->color,$r->id);
 
-                <?php foreach($rect as $r): ?>
+                    ?>
                     <tr>
                         <td><?= $r->id; ?></td>
                         <td><?= $r->width; ?></td>
                         <td><?= $r->height; ?></td>
-
+                        <td bgcolor=<?= $r->color; ?>><?= $r->color; ?></td>
                     </tr>
                 <?php endforeach; ?>
 
@@ -47,16 +51,42 @@ class Page {
     <div class="split right">
         <h1>Current Rectangles</h1>
 
+        <table border="1" id="tblTwo">
+            <tr>
+                <th>ID</th>
+                <th>Rectangle</th>
 
+            </tr>
+
+            <?php foreach($array as $r): ?>
+            <div id="div">  <tr >
+                    <td><?= $r->getId(); ?></td>
+
+                    <td    > <canvas id=<?= $r->getId(); ?>  style="border:0px solid #d3d3d3;">
+                            Your browser does not support the HTML5 canvas tag.</canvas></td>
+
+                    <script>
+                        var c = document.getElementById(<?=$r->getId() ?>);
+                        var ctx = c.getContext("2d");
+
+                        // Red rectangle
+                        ctx.beginPath();
+                        ctx.lineWidth = "6";
+                        ctx.strokeStyle = "red";
+                        ctx.fillRect(0, 0,<?=$r->getWidth() ?>, <?=$r->getHeight() ?>);
+                        ctx.stroke();
+                    </script>
+                </tr>   </div>
+            <?php endforeach; ?>
+
+        </table>
     </div>
-
-
 
 
         </body>
         </html>
 
-    <?php  }
+        <?php  }
     function footer(){
 
     }
@@ -120,7 +150,23 @@ class Page {
         ';
     }
 
+function drawRect($id,$width,$height,$color){
+//todo how do i pass the arguments to the javascipt??
+    echo '
+        <script>
+      
+            var c = document.getElementById(id);
+            var ctx = c.getContext("2d");
 
+            // Red rectangle
+            ctx.beginPath();
+            ctx.lineWidth = "6";
+            ctx.strokeStyle = "red";
+            ctx.fillRect(0, 0, 9, 140);
+            ctx.stroke();
+
+        </script> ';
+}
     function showDefaultRects(){
         echo '
         <script>

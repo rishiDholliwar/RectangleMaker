@@ -21,3 +21,8 @@
     right: 0;
     background-color: darkcyan;
 }
+
+
+#div{
+    max-height:4px; overflow:hidden;
+}

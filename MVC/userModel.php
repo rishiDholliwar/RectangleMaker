@@ -48,35 +48,44 @@ class userModel
 
     }
 
-    function getConn()
+    function resetDB()
     {
-        return self::$connection;
+        //todo get previous values if null
+        $sql = 'Truncate table rectangle';
+        $statement = self::$connection->prepare($sql);
+        if ($statement->execute()) {
+        } else {
+        }
     }
 
-    function add($rect)
+    function add($width, $height, $color)
     {
-        $message = '';
 
-        $width = $rect->getWidth();
-        $height = $rect->getHeight();
-        $color = $rect->getColor();
-        $sql = 'INSERT INTO rectangle(width, height, color) VALUES(:width, :height, :color)';
+        $sql = 'INSERT INTO rectangle(width,height,color) VALUES(:width, :height, :color)';
         $statement = self::$connection->prepare($sql);
         if ($statement->execute([':width' => $width, ':height' => $height, ':color' => $color])) {
             $message = 'data inserted successfully';
-            echo $message;
         }
 
     }
 
-    function update($rect)
+    function update($id, $width, $height, $color)
     {
-
+//todo get previous values if null
+        $sql = 'UPDATE rectangle SET width=:width, height=:height,color=:color WHERE id=:id';
+        $statement = self::$connection->prepare($sql);
+        if ($statement->execute([':width' => $width, ':height' => $height, ':color' => $color, ':id' => $id])) {
+        } else {
+        }
     }
 
-    function delete($rect)
+    function delete($id)
     {
-
+        $sql = 'DELETE FROM rectangle WHERE id=:id';
+        $statement = self::$connection->prepare($sql);
+        if ($statement->execute([':id' => $id])) {
+            header("Location: main.php");
+        }
     }
 
     function getAllRects()

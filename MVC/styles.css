@@ -1,55 +1,51 @@
-.split{
-
-
+.split {
     height: 100%;
     width: 50%;
     position: fixed;
-    z-index:0;
+    z-index: 0;
     top: 0;
     overflow-x: hidden;
     padding-top: 20px;
 
-
 }
 
-.left{
+.left {
     left: 0;
     background-color: darkslategray;
 }
 
-.right{
+.right {
     right: 0;
     background-color: darkcyan;
 }
 
-
-#div{
-    max-height:4px; overflow:hidden;
+#div {
+    max-height: 4px;
+    overflow: hidden;
 }
 
 fieldset {
-    margin-top:10px;
+    margin-top: 10px;
     border-radius: 10px;
     border: 1px solid black;
     width: 230px;
     padding: 10px;
 }
 
-form{
+form {
 
+}
+
+.wrap {
+    margin-top: 40px;
 
 }
 
-
-.wrap{
-margin-top:40px;
-
-}
-.leftForm{
+.leftForm {
     margin-right: 20px;
-    float:left;
+    float: left;
 }
 
-.rightForm{
+.rightForm {
 
 }

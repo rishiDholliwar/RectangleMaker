@@ -23,10 +23,17 @@ class Page {
 
         <?php  self::addRectForm(); ?>
         <?php  self::editRectForm(); ?>
-        <br><br><br><br><br><br>
-        <div class="container">
+
+        <br>
+
+        <form  id="reset" method="post">
+            <div class="buttons">
+                <input id="sub" type="submit" name="reset[]" value="RESET DATABASE" ></input>
+            </div>
+        </form>
 
             <table border="1" id="tbl" class="wrap">
+
                 <tr>
                     <th>ID</th>
                     <th>Width</th>
@@ -163,10 +170,12 @@ class Page {
 
     function editRectForm(){
 
-        echo' <div class="rightForm"><fieldset>
-                <legend>Edit Current Rectangle</legend> <form  id="edit" method="post">
-                <div>
-        Id: <input type="text" value="" name="edit[id]" id="idEdit"></input>
+        echo' <div class="rightForm">
+                <fieldset>
+                <legend>Edit Current Rectangle</legend> 
+                <form  id="edit" method="post">
+             <div>
+        Id: <br><input type="text" value="" name="edit[id]" id="idEdit"></input>
             </div>
             <div>
         Width: <input type="text" value="" name="edit[width]" id="width"></input>
@@ -182,10 +191,14 @@ class Page {
                 <input id="sub" type="submit" value="sub" ></input>
             </div>
             </fieldset>
-        </form> </div>
+        </form>   <div>
         ';
     }
 
+    function popUp(){
+        $message = "wrong answer";
+        echo "<script src='main.php' type='text/javascript'>alert('$message');</script>";
+    }
 function drawRect($id,$width,$height,$color){
 //todo how do i pass the arguments to the javascipt??
     echo '

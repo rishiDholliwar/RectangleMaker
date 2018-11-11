@@ -12,12 +12,12 @@
     $um->connect();
 
 
-
+//todo need to create table in begigning?
 
     //$pg->showRects($um->getConn());
-
+$isError = false;
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-
+$isError = true;
        if (isset($_POST['add'])) {
            $values = $_POST['add'];
           //  if (isset ($_POST['add[width]'])  && isset($_POST['add[height]']) ) {
@@ -37,6 +37,7 @@
 
        }
        if (isset($_POST['edit'])) {
+
            $values = $_POST['edit'];
            $id = $values['id'];
            $width = $values['width'];
@@ -47,6 +48,22 @@
            $statement = $um->getConn()->prepare($sql);
            if ($statement->execute([':width' => $width, ':height' => $height,':color' => $color ,':id' => $id])) {
                //header("Location: index.php"); //redirect to home page
+           } else {
+
+           }
+
+       }
+
+       if (isset($_POST['reset'])) {
+
+
+           //todo get previous values if null
+           $sql = 'Truncate table rectangle';
+           $statement = $um->getConn()->prepare($sql);
+           if ($statement->execute()) {
+               //header("Location: index.php"); //redirect to home page
+           } else {
+
            }
 
        }
@@ -67,9 +84,11 @@
 
 
 
+    if($isError){
 
+    }
     $pg->header($um->getAllRects());
-
+    $pg->popUp();
     //}
     // displayAllUsers
     // conditions for displaying different forms (i.e. add user, update user)

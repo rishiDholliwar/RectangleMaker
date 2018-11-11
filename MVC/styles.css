@@ -43,12 +43,13 @@ form{
 
 .wrap{
 margin-top:40px;
+
 }
 .leftForm{
+    margin-right: 20px;
     float:left;
-    margin-right:20px;
 }
 
 .rightForm{
-float:left;
+
 }

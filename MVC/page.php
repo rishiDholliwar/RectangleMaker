@@ -38,19 +38,22 @@ class Page
                     <th>ID</th>
                     <th>Width</th>
                     <th>Height</th>
+                    <th>Opacity</th>
                     <th>Color</th>
+
                     <th>Action</th>
                 </tr>
                 <?php $array = array(); ?>
                 <?php foreach ($rect as $r): ?>
-                    <?php $array[] = new Rect($r->width, $r->height, $r->color, $r->id);
+                    <?php $array[] = new Rect($r->width, $r->height,$r->opacity ,$r->color, $r->id);
 
                     ?>
                     <tr>
                         <td><?= $r->id; ?></td>
                         <td><?= $r->width; ?></td>
                         <td><?= $r->height; ?></td>
-                        <td bgcolor=<?= $r->color; ?>><?= $r->color; ?></td>
+                        <td><?= $r->opacity; ?></td>
+                        <td bgcolor=<?= $r->color; ?>><?= $r->color; ?> </td>
 
                         <td>
                             <form method="post">
@@ -92,6 +95,7 @@ class Page
                                 ctx.beginPath();
                                 ctx.lineWidth = "6";
                                 ctx.strokeStyle = "red";
+                                ctx.globalAlpha = "<?=$r->getOpacity() ?>";
                                 ctx.fillStyle = "<?=$r->getColor() ?>";
                                 ctx.fillRect(0, 0,<?=$r->getWidth() ?>, <?=$r->getHeight() ?>);
                                 ctx.stroke();
@@ -101,6 +105,8 @@ class Page
                 <?php endforeach; ?>
 
             </table>
+
+
         </div>
 
 
@@ -126,7 +132,9 @@ class Page
             <div>
         Height: <input type="text" value="" name="add[height]" id="height"></input>
             </div>
-
+            <div>
+        Opacity: <input type="text" value="" name="add[opacity]" placeholder="0 to 1" id="opacity"></input>
+            </div>
         Color:  <input type="color" name="add[color]" value="#ff0000" id="color">
 
             <div class="buttons">
@@ -153,6 +161,10 @@ class Page
 
             <div>
         Height: <input type="text" value="" name="edit[height]" id="height"></input>
+            </div>
+            
+                <div>
+        Opacity: <input type="text" value="" name="edit[opacity]" placeholder="0 to 1" id="opacity"></input>
             </div>
 
         Color:  <input type="color" name="edit[color]" value="#ff0000" id="color">
@@ -190,23 +202,6 @@ class Page
         </script> ';
     }
 
-    function showDefaultRects()
-    {
-        echo '
-        <script>
-            var c = document.getElementById("myCanvas");
-            var ctx = c.getContext("2d");
-
-            // Red rectangle
-            ctx.beginPath();
-            ctx.lineWidth = "6";
-            ctx.strokeStyle = "red";
-            ctx.fillRect(5, 5, 290, 140);
-            ctx.stroke();
-
-        </script>
-       ';
-    }
 }
 
 ?>

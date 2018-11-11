@@ -17,16 +17,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $values = $_POST['add'];
         $width = $values['width'];
         $height = $values['height'];
+        $opacity = $values['opacity'];
         $color = $values['color'];
-        $rm->add($width,$height,$color);
+        $rm->add($width,$height,$opacity,$color);
     }
     if (isset($_POST['edit'])) {
         $values = $_POST['edit'];
         $id = $values['id'];
         $width = $values['width'];
         $height = $values['height'];
+        $opacity = $values['opacity'];
         $color = $values['color'];
-        $rm->update($id,$width,$height,$color);
+        $rm->update($id,$width,$height,$opacity,$color);
     }
 
     if (isset($_POST['reset'])) {

@@ -5,12 +5,14 @@ class Rect{
     private $height;
     private $color;
     private $id;
+    private $opacity;
 
-    public function __construct($width, $height, $color,$id)
+    public function __construct($width, $height, $opacity,$color,$id)
     {
         $this->width = $width;
         $this->height = $height;
         $this->color = $color;
+        $this->opacity = $opacity;
         $this->id = $id;
     }
 
@@ -54,6 +56,16 @@ class Rect{
     public function setColor($color)
     {
         $this->color = $color;
+    }
+
+    public function getOpacity()
+    {
+        return $this->opacity;
+    }
+
+    public function setOpacity($opacity)
+    {
+        $this->opacity = $opacity;
     }
 
     public function getId()

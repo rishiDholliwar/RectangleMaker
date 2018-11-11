@@ -22,12 +22,14 @@ class rectModel
             }
 
 
-            $sql = '  CREATE TABLE IF NOT EXISTS rectangle(
-                        width INT,
-                        height  INT,
-                        color VARCHAR(20),
-                        id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
-);
+            $sql = '     CREATE TABLE rectangle(
+                            width INT,
+                            height  INT,
+                            opacity DECIMAL(2,1),
+                            color VARCHAR(20),
+                            id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+                            );
+
 
     ';
             $statement = self::$connection->prepare($sql);
@@ -58,23 +60,23 @@ class rectModel
         }
     }
 
-    function add($width, $height, $color)
+    function add($width, $height, $opacity, $color)
     {
 
-        $sql = 'INSERT INTO rectangle(width,height,color) VALUES(:width, :height, :color)';
+        $sql = 'INSERT INTO rectangle(width,height,opacity,color) VALUES(:width, :height,:opacity,:color)';
         $statement = self::$connection->prepare($sql);
-        if ($statement->execute([':width' => $width, ':height' => $height, ':color' => $color])) {
+        if ($statement->execute([':width' => $width, ':height' => $height, ':opacity' => $opacity,':color' => $color])) {
             $message = 'data inserted successfully';
         }
 
     }
 
-    function update($id, $width, $height, $color)
+    function update($id, $width, $height, $opacity,$color)
     {
 //todo get previous values if null
-        $sql = 'UPDATE rectangle SET width=:width, height=:height,color=:color WHERE id=:id';
+        $sql = 'UPDATE rectangle SET width=:width, height=:height,opacity=:opacity,color=:color WHERE id=:id';
         $statement = self::$connection->prepare($sql);
-        if ($statement->execute([':width' => $width, ':height' => $height, ':color' => $color, ':id' => $id])) {
+        if ($statement->execute([':width' => $width, ':height' => $height,  ':opacity' => $opacity, ':color' => $color, ':id' => $id])) {
         } else {
         }
     }

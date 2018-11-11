@@ -105,10 +105,10 @@ class Page
                 <?php endforeach; ?>
 
             </table>
-
+            <div style="margin-top:200px"></div>
 
         </div>
-
+        <div style="margin-top:200px"></div>
 
         </body>
         </html>
@@ -124,7 +124,8 @@ class Page
     {
 
         echo ' <div class="leftForm"><fieldset>
-                <legend>Add New Rectangle</legend> <form  method="post" id="add">
+                <legend>Add New Rectangle</legend> 
+                <form  method="post" id="add" onsubmit="return validateForm()">
             <div>
         Width: <input type="text" value="" name="add[width]" id="width"></input>
             </div>
@@ -141,7 +142,31 @@ class Page
                 <input id="sub" type="submit" value="sub" ></input>
             </div>
             </fieldset>
-        </form> </div>
+        </form>
+        <script>
+        function validateForm(){
+           var width = document.forms["add"]["width"].value;
+        var height = document.forms["add"]["height"].value;
+        var opacity = document.forms["add"]["opacity"].value;
+        if (width == "" || height == "" || opacity == "") {
+            alert("Did not finish filling out form!");
+            return false;
+        }
+    
+        if(isNaN(width)){
+             alert("width must be number!");
+                 return false;        
+        }
+        
+         if(isNaN(height)){
+             alert("height must be number!");
+                 return false;        
+        }
+       
+            return true;
+        }
+</script>
+         </div>
         ';
     }
 
@@ -151,9 +176,9 @@ class Page
         echo ' <div class="rightForm">
                 <fieldset>
                 <legend>Edit Current Rectangle</legend> 
-                <form  id="edit" method="post">
+                <form  id="edit" method="post"  onsubmit="return validateFormEdit()">
              <div>
-        Id: <br><input type="text" value="" name="edit[id]" id="idEdit"></input>
+        Id: <br><input type="text" value="" name="edit[id]" id="id"></input>
             </div>
             <div>
         Width: <input type="text" value="" name="edit[width]" id="width"></input>
@@ -173,7 +198,39 @@ class Page
                 <input id="sub" type="submit" value="sub" ></input>
             </div>
             </fieldset>
-        </form>   <div>
+        </form>   
+         <script>
+        function validateFormEdit(){
+      
+          
+           var width = document.forms["edit"]["width"].value;
+        var height = document.forms["edit"]["height"].value;
+        var opacity = document.forms["edit"]["opacity"].value;
+        if (width == "" || height == "" || opacity == "") {
+            alert("Did not finish filling out form!");
+            return false;
+        }
+          var idd = document.forms["edit"]["id"].value;
+       if(isNaN(idd)){
+                 alert("id must be number!");
+                     return false;        
+            }
+        
+        if(isNaN(width)){
+             alert("width must be number!");
+                 return false;        
+        }
+        
+         if(isNaN(height)){
+             alert("height must be number!");
+                 return false;        
+        }
+       
+            return true;
+        }
+</script>
+        
+        <div>
         ';
     }
 

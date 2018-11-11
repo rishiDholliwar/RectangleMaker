@@ -2,14 +2,14 @@
 
 require('page.php');
 require('Rect.php');
-require('userModel.php');
+require('rectModel.php');
 
 //Create page obj
 $pg = new Page();
 // Create User Model
-$um = new userModel();
+$rm = new rectModel();
 
-$um->connect();
+$rm->connect();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $isError = true;
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $width = $values['width'];
         $height = $values['height'];
         $color = $values['color'];
-        $um->add($width,$height,$color);
+        $rm->add($width,$height,$color);
     }
     if (isset($_POST['edit'])) {
         $values = $_POST['edit'];
@@ -26,11 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $width = $values['width'];
         $height = $values['height'];
         $color = $values['color'];
-        $um->update($id,$width,$height,$color);
+        $rm->update($id,$width,$height,$color);
     }
 
     if (isset($_POST['reset'])) {
-        $um->resetDB();
+        $rm->resetDB();
     }
 
     header('Location: ' . $_SERVER["PHP_SELF"], true, 303);
@@ -39,11 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 if (array_key_exists('test', $_POST)) {
     $id = $_POST['id'];
-    $um->delete($id);
+    $rm->delete($id);
 }
 
 
-$pg->header($um->getAllRects());
+$pg->header($rm->getAllRects());
 $pg->footer();
 
 function debug_to_console($data)

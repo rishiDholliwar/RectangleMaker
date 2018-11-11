@@ -1,6 +1,6 @@
 <?php
 
-class userModel
+class rectModel
 {
     // create user instance
     private static $connection;

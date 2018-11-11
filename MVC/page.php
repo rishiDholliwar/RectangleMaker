@@ -20,11 +20,13 @@ class Page {
 
     <div class="split left">
         <h1>Rectangle Maker</h1>
+
         <?php  self::addRectForm(); ?>
-        <br><br>
+        <?php  self::editRectForm(); ?>
+        <br><br><br><br><br><br>
         <div class="container">
 
-            <table border="1" id="tbl">
+            <table border="1" id="tbl" class="wrap">
                 <tr>
                     <th>ID</th>
                     <th>Width</th>
@@ -42,6 +44,7 @@ class Page {
                         <td><?= $r->width; ?></td>
                         <td><?= $r->height; ?></td>
                         <td bgcolor=<?= $r->color; ?>><?= $r->color; ?></td>
+
                         <td><form method="post">
                                 <input type="submit" name="test" id="test" value="Delete" /><br/>
                                 <input type="hidden" name="id" value=<?= $r->id; ?>>
@@ -137,21 +140,49 @@ class Page {
 
 
     function addRectForm(){
-      echo'  <form  method="post">
+
+      echo' <div class="leftForm"><fieldset>
+                <legend>Add New Rectangle</legend> <form  method="post" id="add">
             <div>
-        Width: <input type="text" value="" name="width" id="width"></input>
+        Width: <input type="text" value="" name="add[width]" id="width"></input>
             </div>
 
             <div>
-        Height: <input type="text" value="" name="height" id="height"></input>
+        Height: <input type="text" value="" name="add[height]" id="height"></input>
             </div>
 
-        Color:  <input type="color" name="color" value="#ff0000" id="color">
+        Color:  <input type="color" name="add[color]" value="#ff0000" id="color">
 
             <div class="buttons">
                 <input id="sub" type="submit" value="sub" ></input>
             </div>
-        </form> 
+            </fieldset>
+        </form> </div>
+        ';
+    }
+
+    function editRectForm(){
+
+        echo' <div class="rightForm"><fieldset>
+                <legend>Edit Current Rectangle</legend> <form  id="edit" method="post">
+                <div>
+        Id: <input type="text" value="" name="edit[id]" id="idEdit"></input>
+            </div>
+            <div>
+        Width: <input type="text" value="" name="edit[width]" id="width"></input>
+            </div>
+
+            <div>
+        Height: <input type="text" value="" name="edit[height]" id="height"></input>
+            </div>
+
+        Color:  <input type="color" name="edit[color]" value="#ff0000" id="color">
+
+            <div class="buttons">
+                <input id="sub" type="submit" value="sub" ></input>
+            </div>
+            </fieldset>
+        </form> </div>
         ';
     }
 

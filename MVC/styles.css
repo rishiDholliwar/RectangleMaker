@@ -26,3 +26,29 @@
 #div{
     max-height:4px; overflow:hidden;
 }
+
+fieldset {
+    margin-top:10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 230px;
+    padding: 10px;
+}
+
+form{
+
+
+}
+
+
+.wrap{
+margin-top:40px;
+}
+.leftForm{
+    float:left;
+    margin-right:20px;
+}
+
+.rightForm{
+float:left;
+}

@@ -17,49 +17,56 @@
     //$pg->showRects($um->getConn());
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            if (isset ($_POST['width'])  && isset($_POST['height']) ) {
-                $width = $_POST['width'];
-                $height = $_POST['height'];
-                $color = $_POST['color'];
+
+       if (isset($_POST['add'])) {
+           $values = $_POST['add'];
+          //  if (isset ($_POST['add[width]'])  && isset($_POST['add[height]']) ) {
+
+
+                $width = $values['width'];
+                $height = $values['height'];
+                $color = $values['color'];
 
                 $sql = 'INSERT INTO rectangle(width,height,color) VALUES(:width, :height, :color)';
                 $statement = $um->getConn()->prepare($sql);
                 if ($statement->execute([':width' => $width, ':height' => $height, ':color' => $color])) {
                     $message = 'data inserted successfully';
                 }
-                header('Location: '.$_SERVER["PHP_SELF"], true, 303);
-            }
+          //  }
+               // header('Location: '.$_SERVER["PHP_SELF"], true, 303);
+
+       }
+       if (isset($_POST['edit'])) {
+           $values = $_POST['edit'];
+           $id = $values['id'];
+           $width = $values['width'];
+           $height = $values['height'];
+           $color = $values['color'];
+            //todo get previous values if null
+           $sql = 'UPDATE rectangle SET width=:width, height=:height,color=:color WHERE id=:id';
+           $statement = $um->getConn()->prepare($sql);
+           if ($statement->execute([':width' => $width, ':height' => $height,':color' => $color ,':id' => $id])) {
+               //header("Location: index.php"); //redirect to home page
+           }
+
+       }
+       header('Location: '.$_SERVER["PHP_SELF"], true, 303);
+
     }
 
-    if(array_key_exists('test',$_POST)){
-         $id = $_POST['id'];
+    if(array_key_exists('test',$_POST)) {
+        $id = $_POST['id'];
         debug_to_console($id);
 
         $sql = 'DELETE FROM rectangle WHERE id=:id';
-        $statement =  $um->getConn()->prepare($sql);
+        $statement = $um->getConn()->prepare($sql);
         if ($statement->execute([':id' => $id])) {
             header("Location: main.php");
         }
-
-
-      
-      //  echo "THE ID IS = " . $id;
-   /*     $sql = 'DELETE FROM rectangle WHERE id=:id';
-        $statement =  $um->getConn()->prepare($sql);
-        if ($statement->execute([':id' => $id])) {
-            header("Location: main.php");
-        }*/
     }
 
-            //$newRect = new Rect($_POST['width'], $_POST['height'], $_POST['color']);
 
-           //echo"Width of rect is: {$newRect->getWidth()} <br>";
-       //       $um->add($newRect);
-        //   $pg->header($rect);
-         //   unset($_POST);
 
-              //$pg->insertTable($newRect);
-              //$pg->showRects($um->getConn());
 
     $pg->header($um->getAllRects());
 
